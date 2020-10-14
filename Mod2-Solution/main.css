@@ -58,6 +58,7 @@ body {
   font-weight: bold;
   background-color: #04030f;
   color: #fffbff;
+  border: 1px solid black;
 }
 
 .menu_description {
