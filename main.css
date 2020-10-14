@@ -1,0 +1,87 @@
+/* reset browser default values */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* initiate defaults */
+body {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background-color: hsl(17, 10%, 60%);
+}
+
+/* header section */
+#page-header {
+  margin-top: 20px;
+  background-color: #fffbff;
+}
+
+#heading {
+  text-align: center;
+  font-size: 1.75em;
+  color: #362417;
+}
+
+/* menu section */
+.menu-container {
+  width: 100%;
+  height: auto;
+}
+
+.menu-box {
+  float: left;
+  width: 33.33%;
+  height: 100%;
+}
+
+.menu-box::after {
+  clear: both;
+}
+
+.menu {
+  margin: 20px;
+  border: 1px solid #04030f;
+  background-color: #f1dabf;
+  height: 300px;
+  position: relative;
+  padding: 5px;
+}
+
+/* menu content */
+.menu_name {
+  width: 100px;
+  text-align: center;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  font-weight: bold;
+  background-color: #04030f;
+  color: #fffbff;
+}
+
+.menu_description {
+  font-style: italic;
+  margin-top: 30px;
+}
+
+/* media queries */
+
+/* tablet devices */
+@media (min-width: 768px) and (max-width: 991px) {
+  .menu-box {
+    width: 50%;
+  }
+
+  .three {
+    clear: both;
+    width: 100%;
+  }
+}
+
+/* small devices */
+@media (max-width: 767px) {
+  .menu-box {
+    width: 100%;
+  }
+}
