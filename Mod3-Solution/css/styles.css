@@ -1,0 +1,68 @@
+/* header */
+
+/* main content */
+#main-content {
+  margin-top: 50px;
+}
+
+#main-content h2 {
+  font-family: "Sansita Swashed", cursive;
+  font-size: 3em;
+}
+
+#main-content > .container {
+  margin-top: 50px;
+}
+
+.card {
+  width: 100%;
+  background-color: #cccccc;
+}
+
+.card-img-top {
+  max-width: 200px;
+  max-height: 200px;
+}
+
+.card-title {
+  font-weight: bold;
+}
+
+.card-text {
+  font-style: italic;
+  text-indent: 5%;
+  text-align: justify;
+}
+
+/* Footer */
+footer {
+  margin-top: 50px;
+  padding: 20px;
+}
+
+#basi {
+  font-weight: bold;
+  font-style: italic;
+}
+
+footer p {
+  margin-top: 20px;
+}
+
+/* Extra Small Devices */
+@media (max-width: 575px) {
+  .navbar-brand h1 {
+    font-size: 6.5vw;
+  }
+  .col-xs-12 {
+    position: relative;
+    width: 100%;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
