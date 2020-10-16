@@ -1,3 +1,38 @@
+/* header */
+.nav-item:hover {
+  background-color: #b9b9b9;
+}
+
+/* main content */
+#main-content h2 {
+  margin-top: 50px;
+}
+
+.card {
+  margin-top: 25px;
+}
+
+.card-img {
+  max-width: 100px;
+  max-height: 100px;
+  margin-top: 25px;
+}
+
+/* Footer */
+footer {
+  margin-top: 50px;
+  padding: 20px;
+}
+
+#basi {
+  font-weight: bold;
+  font-style: italic;
+}
+
+footer p {
+  margin-top: 20px;
+}
+
 /* Extra Small Devices */
 @media (max-width: 575px) {
   .navbar-brand h1 {
@@ -9,9 +44,6 @@
     min-height: 1px;
     padding-right: 15px;
     padding-left: 15px;
-  }
-
-  .col-xs-12 {
     -webkit-box-flex: 0;
     -ms-flex: 0 0 100%;
     flex: 0 0 100%;
