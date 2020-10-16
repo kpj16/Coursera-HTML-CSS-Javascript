@@ -1,0 +1,20 @@
+/* Extra Small Devices */
+@media (max-width: 575px) {
+  .navbar-brand h1 {
+    font-size: 6.5vw;
+  }
+  .col-xs-12 {
+    position: relative;
+    width: 100%;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+
+  .col-xs-12 {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
