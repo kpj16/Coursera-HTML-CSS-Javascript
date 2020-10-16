@@ -1,4 +1,7 @@
 /* header */
+.nav-item:hover {
+  background-color: #b9b9b9;
+}
 
 /* main content */
 #main-content {
