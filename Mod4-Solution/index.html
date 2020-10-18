@@ -1,16 +1,131 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>Module 4 Solution Starter</title>
-  <script>
-    var names = []; // DO NOT REMOVE
-  </script>
-  <script src="SpeakHello.js"></script>
-  <script src="SpeakGoodBye.js"></script>
-  <script src="script.js"></script>
-</head>
-<body>
-  <h1>Module 4 Solution Starter</h1>
-</body>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Module 4 Solution</title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <!-- error in console : favicon, needed to remove -->
+    <link rel="shortcut icon" href="#" />
+    <script>
+      var names = []; // DO NOT REMOVE
+    </script>
+    <script src="SpeakHello.js"></script>
+    <script src="SpeakGoodBye.js"></script>
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a href="index.html" class="navbar-brand ml-auto mr-auto"
+            ><h1 class="text-light">Module 4 Solution Starter</h1></a
+          >
+        </div>
+      </nav>
+    </header>
+
+    <!-- Main content -->
+    <section id="main-content">
+      <div id="carouselIndicator" class="carousel slide" data-ride="carousel">
+        <div class="carousel-header">
+          <h5 class="text-center">Open your browser's inspector / console</h5>
+          <p class="text-center">
+            Don't know how? Just click the logo of your browser below to know
+            how.
+          </p>
+        </div>
+        <ol class="carousel-indicators">
+          <li
+            data-target="#carouselIndicator"
+            data-slide-to="0"
+            class="active"
+          ></li>
+          <li data-target="#carouselIndicator" data-slide-to="1"></li>
+          <li data-target="#carouselIndicator" data-slide-to="2"></li>
+        </ol>
+
+        <!-- carousel inner -->
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <a
+              href="https://developers.google.com/web/tools/chrome-devtools"
+              target="_blank"
+            >
+              <img src="img/chrome.png" class="carousel-img" alt="Google" />
+            </a>
+            <h2>Google Chrome</h2>
+          </div>
+          <div class="carousel-item">
+            <a
+              href="https://developer.mozilla.org/en-US/docs/Tools/Page_Inspector/How_to/Open_the_Inspector"
+              target="_blank"
+            >
+              <img src="img/firefox.png" class="carousel-img" alt="Firefox" />
+            </a>
+            <h2>Firefox</h2>
+          </div>
+          <div class="carousel-item">
+            <a
+              href="https://docs.microsoft.com/en-us/microsoft-edge/devtools-guide-chromium/open?tabs=cmd-windows"
+            >
+              <img src="img/edge.png" class="carousel-img" alt="Edge" />
+            </a>
+
+            <h2>Edge</h2>
+          </div>
+        </div>
+
+        <!-- carousel controls -->
+        <a
+          class="carousel-control-prev"
+          href="#carouselIndicator"
+          role="button"
+          data-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        </a>
+        <a
+          class="carousel-control-next"
+          href="#carouselIndicator"
+          role="button"
+          data-slide="next"
+          ><span class="carousel-control-next-icon" aria-hidden="true"></span
+        ></a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container-fluid padding bg-dark">
+        <div class="row text-center text-light">
+          <div class="col col-sm-6">
+            <p>Project Created by <span id="basi">Basi</span></p>
+            <p>&copy October 2020</p>
+          </div>
+          <div class="col col-sm-6">
+            <p>Resources used in this website</p>
+            <div>
+              Icons made by
+              <a
+                href="https://www.flaticon.com/authors/pixel-buddha"
+                title="Pixel Buddha"
+                >Pixel Buddha</a
+              >
+              from
+              <a href="https://www.flaticon.com/" title="Flaticon"
+                >www.flaticon.com</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+  </body>
 </html>

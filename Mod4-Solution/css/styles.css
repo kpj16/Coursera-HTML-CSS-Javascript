@@ -1,0 +1,36 @@
+#main-content {
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* carousel header */
+.carousel-header {
+  padding: 5px;
+}
+
+.carousel-header h5 {
+  font-size: 1em;
+}
+
+#carouselIndicator {
+  background: grey;
+  height: 300px;
+}
+
+.carousel-img {
+  margin-top: 5px;
+}
+
+.carousel-item {
+  text-align: center;
+}
+
+.carousel-item h2 {
+  font-size: 1.5em;
+  margin-top: 20px;
+}
+
+footer .col {
+  margin-top: 20px;
+}
