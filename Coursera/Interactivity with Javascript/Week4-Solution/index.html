@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Shipping and Billing</title>
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Header -->
+      <div class="header-container row">
+        <header class="header">
+          <h1>Interactivity with Javascript: Week 4 Assignment</h1>
+          <p>
+            Add the JavaScript code needed to enable auto-complete on this form.
+            Whenever the checkbox is checked, the code should automatically copy
+            the values from Shipping Name and Shipping Zip into the Billing Name
+            and Billing Zip. If the checkbox is unchecked, the Billing Name and
+            Billing Zip should go blank.
+          </p>
+        </header>
+      </div>
+
+      <!-- Main Section -->
+      <div class="main-section-container row">
+        <section class="row">
+          <form>
+            <fieldset>
+              <legend>Shipping Information</legend>
+              <label for="shippingName">Name:</label>
+              <input type="text" name="Name" id="shippingName" required /><br />
+
+              <label for="shippingzip">Zip code:</label>
+              <input
+                type="text"
+                name="zip"
+                id="shippingZip"
+                pattern="[0-9]{5}"
+                required
+              /><br />
+            </fieldset>
+            <input
+              type="checkbox"
+              id="same"
+              name="same"
+              onchange="billingFunction()"
+            />
+            <label for="same">Is the Billing Information the Same?</label>
+            <fieldset>
+              <legend>Billing Information</legend>
+              <label for="billingName">Name:</label>
+              <input type="text" name="Name" id="billingName" required /><br />
+
+              <label for="billingzip">Zip code:</label>
+              <input
+                type="text"
+                name="zip"
+                id="billingZip"
+                pattern="[0-9]{5}"
+                required
+              /><br />
+            </fieldset>
+
+            <div class="btn-submit-container">
+              <input type="submit" id="btn-submit" value="Verify" />
+            </div>
+          </form>
+        </section>
+      </div>
+
+      <!-- Footer -->
+      <div class="footer-container row">
+        <footer class="row">
+          <div class="copyright col-xs-12 col-md-6 col-lg-6 col-xl-6">
+            <p>Project Created by <span id="basi">Basi</span></p>
+            <p>&copy October 2020</p>
+          </div>
+          <div class="resources col-xs-12 col-md-6 col-lg-6 col-xl-6">
+            <p>Resources Used on this project</p>
+            <div>
+              Icons made by
+              <a
+                href="https://www.flaticon.com/authors/pixel-buddha"
+                title="Pixel Buddha"
+                >Pixel Buddha</a
+              >
+              from
+              <a href="https://www.flaticon.com/" title="Flaticon"
+                >www.flaticon.com</a
+              >
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task Lister</title>
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="header row">
+        <div class="col">
+          <header id="header">
+            <h1 id="app-title">Task Lister</h1>
+            <p>
+              A simple project for listing tasks: Basic HTML CSS and JavaScript
+            </p>
+          </header>
+        </div>
+      </div>
+      <div class="main-section row">
+        <section id="input-section" class="col col-xs-12">
+          <label for="text-input">Task:</label>
+          <input type="text" name="text-input" id="text-input" />
+          <button id="btn-add-task">Add task</button>
+        </section>
+        <div id="warning-container" class="col col-xs-12">
+          <p id="warning"></p>
+        </div>
+        <div id="input-description" class="col col-xs-12">
+          <div class="description-list">
+            <ul>
+              <li>
+                Enter the task that you want to do then click on "Add Task".
+              </li>
+              <li>
+                Mark task as done by clicking the &check; on the task list.
+              </li>
+              <li>Remove a task by clicking &#10007; on the task list.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="task-list-container row">
+        <div class="ul-container col col-xs-12">
+          <ul id="ul-task-list">
+            <li class="task-list-item">
+              <p>Task 1</p>
+              <button class="btn-done">&check;</button
+              ><button class="btn-remove">&#10007;</button>
+            </li>
+            <li class="task-list-item">
+              <p>Task 2</p>
+              <button class="btn-done">&check;</button
+              ><button class="btn-remove">&#10007;</button>
+            </li>
+            <li class="task-list-item">
+              <p>Task 3</p>
+              <button class="btn-done">&check;</button
+              ><button class="btn-remove">&#10007;</button>
+            </li>
+          </ul>
+        </div>
+        <div class="clear-all-container col col-xs-12">
+          <button id="btn-clear-all">CLEAR ALL</button>
+        </div>
+      </div>
+      <footer class="footer row">
+        <div class="copyright col-xs-12">
+          <p>Project Created by <span id="basi">Basi</span></p>
+          <p>&copy October 2020</p>
+        </div>
+        <div class="resources col-xs-12">
+          <p>Resources Used on this project</p>
+          <div>
+            Icons made by
+            <a
+              href="https://www.flaticon.com/authors/pixel-buddha"
+              title="Pixel Buddha"
+              >Pixel Buddha</a
+            >
+            from
+            <a href="https://www.flaticon.com/" title="Flaticon"
+              >www.flaticon.com</a
+            >
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>

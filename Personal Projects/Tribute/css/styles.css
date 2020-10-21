@@ -1,0 +1,192 @@
+/* <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background-color: #ffffd4;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* header */
+
+header {
+  flex: 4;
+}
+
+header .container {
+  max-height: 500px;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+  margin: 50px auto;
+  /* border: 2px solid black; */
+}
+
+.container img {
+  width: 100%;
+  border-radius: 10%;
+  box-shadow: 10px 10px 10px 2px rgba(0, 0, 0, 0.75);
+}
+
+header h1 {
+  margin-top: 20px;
+  font-size: 3em;
+}
+
+header p {
+  margin-top: 3px;
+  font-size: 0.9em;
+  font-style: italic;
+  height: 20px;
+}
+
+/* main-section */
+
+#main-section {
+  flex: 2;
+}
+
+.main-section-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.card-container {
+  display: flex;
+  flex-direction: column;
+  width: 33%;
+  height: 200px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.card {
+  flex: 1;
+  border: 2px dotted #2f2f2f;
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 10px;
+  align-items: center;
+}
+
+.card-img-box {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto;
+}
+
+.card img {
+  display: block;
+  width: 100%;
+  max-width: 64px;
+  height: auto;
+}
+
+.card a {
+  text-decoration: none;
+  color: grey;
+}
+
+.card h4 {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.card p {
+  text-align: center;
+  font-size: 0.75em;
+}
+
+/* footer */
+footer {
+  flex: 1;
+  min-height: 60px;
+  max-height: 100px;
+}
+
+.footer-container {
+  min-height: 100%;
+  display: flex;
+  flex-direction: row;
+  background-color: #f6c101;
+  align-items: center;
+}
+
+.footer-container > .col {
+  flex: 1;
+  text-align: center;
+}
+
+.footer-container .col span {
+  font-weight: bold;
+  font-style: italic;
+}
+
+#footer-resources {
+  font-size: 1em;
+  font-weight: bold;
+}
+
+/* media queries */
+@media (max-width: 575px) {
+  .col-sm-6 {
+    width: 50%;
+  }
+
+  .col-sm-12 {
+    margin-top: 10px;
+    width: 100%;
+  }
+
+  .card-container {
+    padding: 2px;
+  }
+
+  .card {
+    width: 100%;
+  }
+
+  header {
+    flex: 2;
+  }
+
+  header .container {
+    width: 400px;
+    margin: 25px auto;
+  }
+
+  header h1 {
+    margin-top: 20px;
+    font-size: 2em;
+  }
+
+  header p {
+    margin-top: 3px;
+    font-size: 0.75em;
+    font-style: italic;
+    flex: 1;
+  }
+
+  .copyright-container {
+    font-size: 0.85em;
+  }
+
+  .resource-container {
+    font-size: 0.85em;
+  }
+}

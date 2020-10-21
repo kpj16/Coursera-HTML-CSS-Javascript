@@ -1,0 +1,180 @@
+input {
+  border: 1px solid black;
+}
+input:focus {
+  background-color: #e6e6e6;
+}
+fieldset {
+  margin-bottom: 4%;
+  margin-top: 4%;
+  padding: 10px;
+}
+
+input:read-only {
+  background-color: #c4c4c4;
+}
+
+legend {
+  font-weight: bold;
+}
+
+body {
+  background-color: #9ba4b4;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  height: 100%;
+}
+
+.container {
+  height: 100vh;
+}
+
+/* layouting */
+.header-container {
+  height: 20%;
+}
+
+.main-section-container {
+  height: 70%;
+}
+
+.footer-container {
+  height: 10%;
+}
+
+/* header */
+.header {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-container h1 {
+  width: 100%;
+  font-size: 2em;
+  text-align: center;
+}
+
+.header-container p {
+  max-width: 100%;
+  text-align: center;
+  margin-top: 20px;
+  font-style: italic;
+}
+
+/* main section */
+
+.main-section-container > section {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.main-section-container > section > form {
+  border: 3px solid black;
+  width: 40%;
+  padding: 30px;
+  background-color: #f1f6f9;
+}
+
+.btn-submit-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+#btn-submit {
+  width: 70px;
+  height: 45px;
+}
+
+#btn-submit:hover {
+  background-color: #c4c4c4;
+}
+
+/* footer */
+.copyright,
+.resources {
+  width: 50%;
+  text-align: center;
+}
+
+footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+#basi {
+  font-style: italic;
+  font-weight: bold;
+}
+
+/* media queries */
+@media (max-width: 991px) {
+  .main-section-container > section > form {
+    width: 80%;
+  }
+  .main-section-container > section {
+    align-items: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-container h1 {
+    font-size: 1.5em;
+  }
+
+  .header-container p {
+    font-size: 1em;
+  }
+
+  .main-section-container > section {
+    align-items: center;
+  }
+
+  .main-section-container > section > form {
+    width: 80%;
+  }
+}
+
+@media (max-width: 575px) {
+  .header-container h1 {
+    font-size: 1.5em;
+  }
+
+  .header-container p {
+    font-size: 0.8em;
+  }
+
+  .main-section-container > section {
+    align-items: center;
+  }
+
+  .main-section-container > section > form {
+    width: 80%;
+  }
+
+  fieldset {
+    margin-bottom: 0;
+    margin-top: 0;
+    padding: 20px;
+  }
+
+  legend {
+    font-weight: bold;
+    font-size: 1em;
+  }
+
+  label {
+    font-size: 0.8em;
+  }
+
+  input {
+    max-width: 140px;
+  }
+}
