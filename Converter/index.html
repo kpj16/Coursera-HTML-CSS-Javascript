@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Data Converter</title>
+    <link rel="stylesheet" href="css/content.css" />
+    <!-- <link rel="stylesheet" href="css/card.css" /> -->
+    <!-- <link rel="stylesheet" href="css/styles.css" /> -->
+  </head>
+  <body>
+    <header>
+      <h1>DATA CONVERTER</h1>
+    </header>
+
+    <!-- Data Converter to COL -->
+    <div class="container">
+      <div class="row input">
+        <label for="source-input" class="row-input-label">Convert from:</label>
+        <input
+          type="number"
+          name="source-input"
+          class="row-input"
+          id="source-input"
+          min="0"
+        />
+        <select name="source-data" class="row-select" id="source-data">
+          <option value="bits">Bits(b)</option>
+          <option value="byte">Byte(B)</option>
+          <option value="kilobyte">KiloByte(KB)</option>
+          <option value="megabyte">MegaByte(MB)</option>
+          <option value="gigabyte">GigaByte(GB)</option>
+          <option value="terabyte">TeraByte(TB)</option>
+          <option value="petabyte">PetaByte(PB)</option>
+        </select>
+      </div>
+
+      <div class="row output">
+        <label for="source-output" class="row-input-label">Convert to:</label>
+        <input
+          type="number"
+          name="source-output"
+          class="row-input"
+          id="source-output"
+          min="0"
+        />
+        <select name="output-data" class="row-select" id="output-data">
+          <option value="bits">Bits(b)</option>
+          <option value="byte">Byte(B)</option>
+          <option value="kilobyte">KiloByte(KB)</option>
+          <option value="megabyte">MegaByte(MB)</option>
+          <option value="gigabyte">GigaByte(GB)</option>
+          <option value="terabyte">TeraByte(TB)</option>
+          <option value="petabyte">PetaByte(PB)</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- BMI -->
+    <div class="container">
+      <div class="row input">
+        <div class="col col-3">
+          <label for="bmi-weight" class="row-input-label">Weight:</label>
+        </div>
+        <div class="col col-5">
+          <input type="number" class="row-input" id="bmi-weight" min="1" />
+        </div>
+        <div class="col col-4">
+          <select
+            name="bmi-weight-unit"
+            class="row-select"
+            id="bmi-weight-unit"
+          >
+            <option value="kg">kilograms</option>
+            <option value="lb">pounds</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row input">
+        <div class="col col-3">
+          <label for="bmi-height" class="row-input-label">Height:</label>
+        </div>
+        <div class="col col-5">
+          <input type="number" class="row-input" id="bmi-height" min="1" />
+        </div>
+        <div class="col col-4">
+          <select
+            name="bmi-height-unit"
+            class="row-select"
+            id="bmi-height-unit"
+          >
+            <option value="cm">centimeters</option>
+            <option value="m">meters</option>
+            <option value="ft">feet</option>
+            <option value="in">inches</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row input">
+        <div class="col col-12">
+          <button id="btn-compute-bmi">Compute BMI</button>
+        </div>
+      </div>
+
+      <div class="row output">
+        <div class="col col-6">
+          <p id="bmi-result"></p>
+        </div>
+        <div class="col col-6">
+          <p id="bmi-result-status"></p>
+        </div>
+      </div>
+
+      <div class="row output">
+        <div class="col center col-12">
+          <table class="bmi-table">
+            <tr>
+              <th>BMI</th>
+              <th>Weight Status</th>
+            </tr>
+            <tr>
+              <td>Below 18.5</td>
+              <td>Underweight</td>
+            </tr>
+            <tr>
+              <td>18.5 - 24.9</td>
+              <td>Normal</td>
+            </tr>
+            <tr>
+              <td>25.0 - 29.9</td>
+              <td>Overweight</td>
+            </tr>
+            <tr>
+              <td>Above 30.0</td>
+              <td>Obese</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- AGE -->
+    <div class="container">
+      <div class="row">
+        <div class="col col-4">
+          <label for="dob-input" class="row-input-label">Date of Birth:</label>
+        </div>
+        <div class="col col-5">
+          <input
+            type="date"
+            class="row-input"
+            name="dob-input"
+            id="dob-input"
+          />
+        </div>
+        <div class="col center col-3">
+          <button id="btn-age-compute">Compute</button>
+        </div>
+      </div>
+
+      <div class="row hidden">
+        <div class="col col-12">
+          <p>Please enter a valid birthdate!</p>
+        </div>
+      </div>
+      <div class="row output hidden">
+        <div class="col col-4">
+          <p id="dob-output"></p>
+        </div>
+        <div class="col col-4">
+          <select name="age-options" class="row-select" id="age-options">
+            <option value="years">Years</option>
+            <option value="months">Months</option>
+            <option value="weeks">Weeks</option>
+            <option value="days">Days</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- DATE -->
+    <div class="container">
+      <div class="date-input-container">
+        <label for="date-from" class="input-label">Date From:</label>
+        <input type="date" class="input-date" name="date-from" id="date-from" />
+        <br />
+        <label for="date-to" class="input-label">Date To:</label>
+        <input type="date" class="input-date" name="date-to" id="date-to" />
+      </div>
+      <div class="date-output-container">
+        <h4>Difference:</h4>
+        <p id="date-years"></p>
+        <p id="date-months"></p>
+        <p id="date-days"></p>
+      </div>
+    </div>
+
+    <!-- TEMPERATURE -->
+    <div class="container">
+      <div class="input-container">
+        <label for="temp-source-input" class="input-label">From:</label>
+        <input type="number" name="temp-source-input" id="temp-source-input" />
+        <select name="temp-source-options" id="temp-source-options">
+          <option value="celcius">&#176;C Celcius</option>
+          <option value="farenheit">&#176;F Farenheit</option>
+          <option value="kelvin">K Kelvin</option>
+          <option value="rankine">&#176;R Rankine</option>
+          <option value="reaumur">&#176;Re Réaumur</option>
+        </select>
+      </div>
+
+      <div class="output-container">
+        <label for="temp-source-output" class="input-label">To:</label>
+        <input
+          type="number"
+          name="temp-source-output"
+          id="temp-source-output"
+        />
+        <select name="temp-to-options" id="temp-to-options">
+          <option value="celcius">&#176;C Celcius</option>
+          <option value="farenheit">&#176;F Farenheit</option>
+          <option value="kelvin">K Kelvin</option>
+          <option value="rankine">&#176;R Rankine</option>
+          <option value="reaumur">&#176;Re Réaumur</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- DISCOUNT -->
+    <div class="container">
+      <div class="input-container">
+        <label for="disc-original-price" class="input-label"
+          >Original Price:
+        </label>
+        <input
+          type="number"
+          name="disc-original-price"
+          id="disc-original-price"
+          min="0"
+          required
+        />
+        <br />
+        <label for="disc-discount-rate" class="input-label"
+          >Discount (in %)</label
+        >
+        <input
+          type="number"
+          name="disc-discount-rate"
+          id="disc-discount-rate"
+          min="0"
+          max="100"
+          required
+        />
+      </div>
+
+      <div class="output-container">
+        <p>
+          Final Price:
+          <span id="disc-final-price"></span>
+        </p>
+      </div>
+    </div>
+
+    <!-- LENGTH -->
+    <div class="container">
+      <div class="input-container">
+        <label class="input-label">From:</label>
+        <input type="number" name="length-input" id="length-input" min="0" />
+        <select name="length-option" id="length-input-option">
+          <option value="km">Kilometer</option>
+          <option value="m">Meter</option>
+          <option value="dm">Decimeter</option>
+          <option value="cm">Centimeter</option>
+          <option value="mm">Millimeter</option>
+          <option value="um">Micrometer</option>
+          <option value="nm">Nanometer</option>
+          <option value="pm">Picometer</option>
+          <option value="nmi">Nautical Mile</option>
+          <option value="mi">Mile</option>
+          <option value="fur">Furlong</option>
+          <option value="ftm">Fathom</option>
+          <option value="yd">Yard</option>
+          <option value="ft">Foot</option>
+          <option value="in">Inch</option>
+          <br />
+        </select>
+      </div>
+
+      <div class="output-container">
+        <label for="length-output" class="input-label">To:</label>
+        <input type="number" name="length-output" id="length-output" min="0" />
+        <select name="length-option" id="length-output-option">
+          <option value="km">Kilometer</option>
+          <option value="m">Meter</option>
+          <option value="dm">Decimeter</option>
+          <option value="cm">Centimeter</option>
+          <option value="mm">Millimeter</option>
+          <option value="um">Micrometer</option>
+          <option value="nm">Nanometer</option>
+          <option value="pm">Picometer</option>
+          <option value="nmi">Nautical Mile</option>
+          <option value="mi">Mile</option>
+          <option value="fur">Furlong</option>
+          <option value="ftm">Fathom</option>
+          <option value="yd">Yard</option>
+          <option value="ft">Foot</option>
+          <option value="in">Inch</option>
+          <br />
+        </select>
+      </div>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script src="js/luxon.js"></script>
+  </body>
+</html>

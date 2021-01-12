@@ -1,0 +1,56 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  text-align: center;
+  background: rgb(225, 224, 237);
+  background: linear-gradient(
+    90deg,
+    rgba(225, 224, 237, 1) 0%,
+    rgba(20, 213, 185, 1) 30%,
+    rgba(25, 208, 186, 1) 37%,
+    rgba(69, 169, 195, 1) 64%,
+    rgba(25, 196, 233, 1) 87%,
+    rgba(0, 212, 255, 1) 93%
+  );
+}
+
+/* Header */
+#project-title {
+  margin-top: 50px;
+  font-size: 100px;
+}
+
+/* Main Content */
+.main-content {
+  margin-top: 50px;
+}
+
+.time > p {
+  font-size: 80px;
+  display: inline-block;
+  min-width: 100px;
+  max-width: 100px;
+}
+
+.time > span {
+  font-size: 80px;
+  width: 20px;
+}
+
+/* Buttons */
+.container {
+  margin-top: 50px;
+}
+
+button {
+  width: 100px;
+  margin: 20px 20px;
+}
+
+button:hover {
+  background-color: rgb(124, 124, 124);
+}

@@ -1,0 +1,98 @@
+* {
+  margin: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #ccc;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+}
+
+.container {
+  border: 3px solid black;
+  width: 400px;
+  margin: 50px auto;
+  height: auto;
+  padding: 5px;
+  background-color: rgb(226, 186, 226);
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  margin: 2.5px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.hidden {
+  display: none;
+}
+
+.row-input-label {
+  flex-grow: 0;
+}
+
+.row-input {
+  width: 100%;
+  flex-grow: 0;
+}
+
+.row-select {
+  width: 100%;
+  flex-grow: 0;
+  border: 1px solid black;
+}
+
+.col {
+  display: flex;
+  flex-direction: row;
+  padding-left: 2.5px;
+  padding-right: 2.5px;
+  justify-content: left;
+}
+
+.col.center {
+  justify-content: center;
+}
+
+.col-3 {
+  width: 25%;
+}
+
+.col-4 {
+  width: 33.33%;
+}
+
+.col-5 {
+  width: 41.66%;
+}
+
+.col-6 {
+  width: 50%;
+}
+
+.col-12 {
+  width: 99%;
+}
+
+/* general html elements */
+input {
+  border: 1px solid black;
+}
+
+button {
+  margin: 0 auto;
+}
+
+.bmi-table,
+tr,
+th,
+td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  text-align: center;
+}

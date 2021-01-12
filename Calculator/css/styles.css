@@ -1,0 +1,128 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#title {
+  text-align: center;
+}
+
+/* main-content */
+.main-content {
+  border: 2px solid black;
+  border-radius: 10px;
+  background-color: #ccc;
+  width: 340px;
+  padding: 5px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* display */
+.display-container {
+  width: 100%;
+  height: 100px;
+  margin: 10px auto;
+}
+
+input {
+  height: 100%;
+  width: 100%;
+  border: 1px solid purple;
+  border-radius: 5px;
+  font-size: 32px;
+  text-align: right;
+}
+
+/* buttons */
+.buttons-container {
+  margin: auto;
+  display: grid;
+  grid-template-areas:
+    "divide multi minus plus"
+    "seven eight nine clear"
+    "four five six period"
+    "one two three sero"
+    "equals equals equals equals";
+  grid-gap: 1px 1px;
+  width: 100%;
+  height: auto;
+}
+
+button {
+  /* width: 70px; */
+  height: 70px;
+}
+
+#btn-divide {
+  grid-area: divide;
+}
+
+#btn-multiply {
+  grid-area: multi;
+}
+
+#btn-minus {
+  grid-area: minus;
+}
+
+#btn-add {
+  grid-area: plus;
+}
+
+#btn-0 {
+  grid-area: sero;
+}
+
+#btn-1 {
+  grid-area: one;
+}
+
+#btn-2 {
+  grid-area: two;
+}
+
+#btn-3 {
+  grid-area: three;
+}
+
+#btn-4 {
+  grid-area: four;
+}
+
+#btn-5 {
+  grid-area: five;
+}
+
+#btn-6 {
+  grid-area: six;
+}
+
+#btn-7 {
+  grid-area: seven;
+}
+
+#btn-8 {
+  grid-area: eight;
+}
+
+#btn-9 {
+  grid-area: nine;
+}
+
+#btn-clear {
+  grid-area: clear;
+  height: 100%;
+}
+
+#btn-dot {
+  grid-area: period;
+  height: 100%;
+}
+
+#btn-equals {
+  grid-area: equals;
+  width: 100%;
+}

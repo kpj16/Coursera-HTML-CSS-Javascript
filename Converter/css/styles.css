@@ -1,0 +1,121 @@
+* {
+  margin: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #ccc;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+}
+
+h1 {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.container,
+.dc-container,
+.bmi-container,
+.age-container {
+  border: 3px solid black;
+  width: 400px;
+  margin: 50px auto;
+  height: auto;
+  padding: 10px;
+  background-color: rgb(226, 186, 226);
+}
+
+.dc-input,
+.dc-output,
+.bmi-input,
+.bmi-output,
+.bmi-weight-container,
+.bmi-height-container,
+.age-input,
+.age-output,
+.age-error-container,
+.input-container,
+.output-container {
+  margin: 10px 10px 0px 0px;
+}
+
+.bmi-btn-container {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.bmi-output {
+  text-align: center;
+}
+
+#bmi-result,
+#bmi-result-status {
+  display: none;
+  margin: 10px auto;
+}
+
+.bmi-class {
+  font-weight: bold;
+}
+
+label {
+  font-weight: bold;
+}
+
+.input-label {
+  display: inline-block;
+  width: 120px;
+}
+
+input {
+  width: 100px;
+  border: 1px solid black;
+}
+
+.input-date {
+  width: 150px;
+  text-align: center;
+}
+
+select {
+  border: 1px solid black;
+  width: 100px;
+}
+
+.bmi-table-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.bmi-table,
+tr,
+th,
+td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+.age-output {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+#dob-output {
+  margin-right: 10px;
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+}
+
+.age-error-container {
+  display: none;
+}

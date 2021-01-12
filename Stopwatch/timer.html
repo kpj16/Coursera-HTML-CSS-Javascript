@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Timer</title>
+    <link rel="stylesheet" href="css/timer.css" />
+  </head>
+  <body>
+    <header>
+      <h1 id="project-title">Timer</h1>
+    </header>
+    <div class="main-content">
+      <div class="warning-container"></div>
+      <div class="input-container">
+        <form onsubmit="event.preventDefault()">
+          <label for="input-hours">Hours:</label>
+          <input
+            type="number"
+            name="input-hours"
+            id="input-hours"
+            min="0"
+            max="24"
+            required
+          />
+          <label for="input-mins">Minutes:</label>
+          <input
+            type="number"
+            name="input-mins"
+            id="input-mins"
+            min="0"
+            max="59"
+            required
+          />
+          <label for="input-secs">Seconds:</label>
+          <input
+            type="number"
+            name="input-secs"
+            id="input-secs"
+            min="0"
+            max="59"
+            required
+          />
+          <div class="btn-container">
+            <button id="btn-pause"><img src="img/pause.png" alt="" /></button>
+            <button id="btn-play"><img src="img/play.png" alt="" /></button>
+            <button id="btn-reset"><img src="img/refresh.png" alt="" /></button>
+          </div>
+        </form>
+      </div>
+      <div class="timer-container">
+        <div class="time">
+          <p id="hours">00</p>
+          <span>h:</span>
+          <p id="minutes">00</p>
+          <span>m:</span>
+          <p id="seconds">00</p>
+          <span>s</span>
+        </div>
+      </div>
+    </div>
+    <script src="js/timer.js"></script>
+  </body>
+</html>
