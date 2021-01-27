@@ -1,0 +1,64 @@
+<!-- BMI -->
+<div class="row">
+  <div class="col col-8">
+    <label for="bmi-weight" class="row-input-label">Weight:</label>
+    <input type="number" class="row-input" id="bmi-weight" min="1" required />
+  </div>
+  <div class="col col-4">
+    <select name="bmi-weight-unit" class="row-select" id="bmi-weight-unit">
+      <option value="kg">kilograms</option>
+      <option value="lb">pounds</option>
+    </select>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col col-8">
+    <label for="bmi-height" class="row-input-label">Height:</label>
+    <input type="number" class="row-input" id="bmi-height" min="1" required />
+  </div>
+  <div class="col col-4">
+    <select name="bmi-height-unit" class="row-select" id="bmi-height-unit">
+      <option value="cm">centimeters</option>
+      <option value="m">meters</option>
+      <option value="ft">feet</option>
+      <option value="in">inches</option>
+    </select>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col col-12">
+    <button id="btn-compute-bmi">Compute BMI</button>
+  </div>
+</div>
+
+<div class="row output hidden">
+  <div class="col center col-12">
+    <table class="bmi-table">
+      <tr>
+        <th>BMI</th>
+        <th>Weight Status</th>
+      </tr>
+      <tr>
+        <td>Below 18.5</td>
+        <td>Underweight</td>
+      </tr>
+      <tr>
+        <td>18.5 - 24.9</td>
+        <td>Normal</td>
+      </tr>
+      <tr>
+        <td>25.0 - 29.9</td>
+        <td>Overweight</td>
+      </tr>
+      <tr>
+        <td>Above 30.0</td>
+        <td>Obese</td>
+      </tr>
+    </table>
+  </div>
+  <div class="col col-12 flex-center text-center">
+    <h3 id="bmi-result" class="text-result"></h3>
+  </div>
+</div>

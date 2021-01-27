@@ -1,17 +1,33 @@
-// TODO:
-// fix output for discount: display price round off
-// fix output for temperature : display float round off
+// initiate variables
+const circleList = document.querySelectorAll(".circle");
+const displaySection = document.querySelector("#display-section");
 
-// fix output display
-// generalize css
+// global variables
+let isFirstButtonClicked = false;
+let currentPage = null;
+let previousCircle;
+let errorContainer;
+let errorMessage;
+let outputContainer;
 
-// declare variables
+// age input / output
+let ageInput;
+let ageOutput;
+let btnAgeCompute;
+let ageOptions;
 
-// data converter
-const sourceInp = document.querySelector("#source-input");
-const sourceData = document.querySelector("#source-data");
-const outInt = document.querySelector("#source-output");
-const outData = document.querySelector("#output-data");
+let sourceWeight;
+let sourceHeight;
+let weightUnit;
+let heightUnit;
+let btnComputeBMI;
+let bmiResult;
+
+// data
+let sourceInp;
+let sourceData;
+let outInt;
+let outData;
 
 const dataTable = {
   bits: -10,
@@ -23,112 +39,508 @@ const dataTable = {
   petabyte: 5,
 };
 
-// bmi input / output
-const sourceWeight = document.querySelector("#bmi-weight");
-const sourceHeight = document.querySelector("#bmi-height");
-const weightUnit = document.querySelector("#bmi-weight-unit");
-const heightUnit = document.querySelector("#bmi-height-unit");
-const btnComputeBMI = document.querySelector("#btn-compute-bmi");
-const bmiResult = document.querySelector("#bmi-result");
-const bmiResultStatus = document.querySelector("#bmi-result-status");
-
-// age input / output
-const ageInput = document.querySelector("#dob-input");
-const ageOutput = document.querySelector("#dob-output");
-const ageOutputContainer = document.querySelector(".age-output");
-const ageErrorContainer = document.querySelector(".age-error-container");
-const btnAgeCompute = document.querySelector("#btn-age-compute");
-const ageOptions = document.querySelector("#age-options");
-
-// date
-const dateFrom = document.querySelector("#date-from");
-const dateTo = document.querySelector("#date-to");
-const dateYear = document.querySelector("#date-years");
-const dateMonths = document.querySelector("#date-months");
-const dateDays = document.querySelector("#date-days");
-
-// temperature
-const sourceTemp = document.querySelector("#temp-source-input");
-const destTemp = document.querySelector("#temp-source-output");
-const sourceTempUnit = document.querySelector("#temp-source-options");
-const destTempUnit = document.querySelector("#temp-to-options");
+//date
+let dateFrom;
+let dateTo;
+let dateYear;
+let dateMonths;
+let dateDays;
 
 // discount
-const discOrigPrice = document.querySelector("#disc-original-price");
-const discDiscRate = document.querySelector("#disc-discount-rate");
-const discFinalPrice = document.querySelector("#disc-final-price");
+let discOrigPrice;
+let discDiscRate;
+let discFinalPrice;
 
 // length
-const lengthInput = document.querySelector("#length-input");
-const lengthInputOption = document.querySelector("#length-input-option");
-const lengthOutput = document.querySelector("#length-output");
-const lengthOutputOption = document.querySelector("#length-output-option");
+let lengthInput;
+let lengthInputOption;
+let lengthOutput;
+let lengthOutputOption;
+
+// temperature
+let sourceTemp;
+let destTemp;
+let sourceTempUnit;
+let destTempUnit;
+
+// hard coding transition
+let transitionCount = 0;
+
+document.addEventListener("DOMContentLoaded", addListeners);
 
 function addListeners() {
-  // data
-  sourceInp.oninput = computeData;
-  outInt.oninput = computeDataReverse;
-  sourceData.addEventListener("change", computeData);
-  outData.addEventListener("change", computeData);
+  displaySection.addEventListener("transitionend", (event) => {
+    transitionCount += 1;
 
-  // bmi
-  btnComputeBMI.addEventListener("click", computeBMI);
+    // hard coded transition for the start of the button click
+    if (transitionCount == 3) {
+      const rowList = displaySection.querySelectorAll(".row");
+      rowList.forEach((element) => {
+        if (!element.classList.contains("hidden")) {
+          element.style.display = "flex";
+        }
+      });
+    }
+  });
 
-  // age
-  btnAgeCompute.addEventListener("click", computeAge);
-  ageOptions.addEventListener("change", computeAge);
-
-  // date
-  dateFrom.value = getDateToday();
-  dateTo.value = getDateToday();
-  dateFrom.addEventListener("change", computeDate);
-  dateTo.addEventListener("change", computeDate);
-
-  // temperature
-  sourceTemp.oninput = computeTemperature;
-  // destTemp.oninput = computeTempReverse;
-  sourceTempUnit.addEventListener("change", computeTemperature);
-  destTempUnit.addEventListener("change", computeTemperature);
-
-  // discount
-  discOrigPrice.addEventListener("input", computeDiscount);
-  discDiscRate.addEventListener("input", computeDiscount);
-
-  discDiscRate.defaultValue = 10;
-
-  // length
-  lengthInput.addEventListener("input", computeLength);
-  // lengthOutput.addEventListener("input") reverse
-  lengthInputOption.addEventListener("change", computeLength);
-  lengthOutputOption.addEventListener("change", computeLength);
+  circleList.forEach(function (currentValue, currentIndex, listObj) {
+    // console.log(`${currentValue} + ${currentIndex} + ${listObj}`);
+    // console.log(`${currentValue.firstElementChild.innerHTML}`);
+    currentValue.addEventListener("click", ready);
+  });
 }
 
-function isNotEmptyAndValid(value, lowerLimit, upperLimit) {
-  const temp = parseInt(value);
-  if (upperLimit != null) {
-    if (
-      value != null &&
-      value != "" &&
-      value >= lowerLimit &&
-      value <= upperLimit
-    ) {
-      return true;
-    } else {
-      return false;
+function ready() {
+  // console.log(`${this.firstElementChild.innerHTML} is the child inner HTML`);
+
+  // TODO: Think of better implementation
+  // add default values in case it cannot match the innerHTML
+  let url = "snippets/bmi.html";
+
+  const category = this.firstElementChild.innerHTML;
+
+  if (currentPage != category) {
+    switch (category) {
+      case "AGE":
+        url = "snippets/age.html";
+        break;
+      case "BMI":
+        url = "snippets/bmi.html";
+        break;
+      case "DATA":
+        url = "snippets/data.html";
+        break;
+      case "DATE":
+        url = "snippets/date.html";
+        break;
+      case "DISCOUNT":
+        url = "snippets/discount.html";
+        break;
+      case "LENGTH":
+        url = "snippets/length.html";
+        break;
+      case "TEMP":
+        url = "snippets/temp.html";
+        break;
+      default:
+        break;
     }
+    generateSnippet(url, category);
+
+    if (previousCircle != null) {
+      previousCircle.classList.toggle("hovered");
+    }
+    currentPage = category;
+    this.classList.toggle("hovered");
+    previousCircle = this;
   } else {
-    if (value != null && value != "" && value >= lowerLimit) {
-      return true;
-    } else {
-      return false;
-    }
   }
 }
 
+function generateSnippet(url, category) {
+  const xhr = new XMLHttpRequest();
+
+  xhr.open("GET", url, true);
+  xhr.onload = function () {
+    if (this.status == 200) {
+      displaySection.innerHTML = this.responseText;
+
+      // display animation / transition
+      if (!isFirstButtonClicked) {
+        displaySection.querySelectorAll(".row").forEach((element) => {
+          if (!element.classList.contains("hidden")) {
+            element.style.display = "none";
+          }
+        });
+        displayTransition();
+        isFirstButtonClicked = true;
+      }
+
+      // load listeners for the input
+      loadCategoryListeners(category);
+    } else if (this.status == 404) {
+      displaySection.innerHTML = "Error 404: Page not Found!";
+    } else {
+      displaySection.innerHTML = "Error " + this.status;
+    }
+  };
+
+  xhr.send();
+}
+
+// animation code
+function displayTransition() {
+  displaySection.style.width = "450px";
+  displaySection.style.height = "300px";
+  displaySection.style.visibility = "visible";
+}
+
+//main functionality
+function loadCategoryListeners(category) {
+  // console.log(`Loading categories...`);
+  switch (category) {
+    case "AGE":
+      ageInput = document.querySelector("#dob-input");
+      ageOutput = document.querySelector("#dob-output");
+      btnAgeCompute = document.querySelector("#btn-age-compute");
+      ageOptions = document.querySelector("#age-options");
+
+      ageInput.addEventListener("change", truncateAge);
+      btnAgeCompute.addEventListener("click", computeAge);
+      ageOptions.addEventListener("change", computeAge);
+      break;
+    case "BMI":
+      sourceWeight = document.querySelector("#bmi-weight");
+      sourceHeight = document.querySelector("#bmi-height");
+      weightUnit = document.querySelector("#bmi-weight-unit");
+      heightUnit = document.querySelector("#bmi-height-unit");
+      btnComputeBMI = document.querySelector("#btn-compute-bmi");
+      bmiResult = document.querySelector("#bmi-result");
+
+      btnComputeBMI.addEventListener("click", computeBMI);
+      break;
+    case "DATA":
+      sourceInp = document.querySelector("#source-input");
+      sourceData = document.querySelector("#source-data");
+      outInt = document.querySelector("#source-output");
+      outData = document.querySelector("#output-data");
+
+      sourceInp.oninput = computeData;
+      outInt.oninput = computeDataReverse;
+      sourceData.addEventListener("change", computeData);
+      outData.addEventListener("change", computeData);
+      break;
+    case "DATE":
+      dateFrom = document.querySelector("#date-from");
+      dateTo = document.querySelector("#date-to");
+      dateYear = document.querySelector("#date-years");
+      dateMonths = document.querySelector("#date-months");
+      dateDays = document.querySelector("#date-days");
+
+      dateTo.value = getDateToday();
+      dateFrom.addEventListener("change", computeDate);
+      dateTo.addEventListener("change", computeDate);
+      break;
+    case "DISCOUNT":
+      discOrigPrice = document.querySelector("#disc-original-price");
+      discDiscRate = document.querySelector("#disc-discount-rate");
+      discFinalPrice = document.querySelector("#disc-final-price");
+
+      discOrigPrice.addEventListener("input", computeDiscount);
+      discDiscRate.addEventListener("input", computeDiscount);
+
+      discDiscRate.defaultValue = 10;
+      break;
+    case "LENGTH":
+      lengthInput = document.querySelector("#length-input");
+      lengthInputOption = document.querySelector("#length-input-option");
+      lengthOutput = document.querySelector("#length-output");
+      lengthOutputOption = document.querySelector("#length-output-option");
+
+      lengthInput.addEventListener("input", computeLength);
+      // lengthOutput.addEventListener("input") reverse
+      lengthInputOption.addEventListener("change", computeLength);
+      lengthOutputOption.addEventListener("change", computeLength);
+      break;
+    case "TEMP":
+      sourceTemp = document.querySelector("#temp-source-input");
+      destTemp = document.querySelector("#temp-source-output");
+      sourceTempUnit = document.querySelector("#temp-source-options");
+      destTempUnit = document.querySelector("#temp-to-options");
+
+      sourceTemp.oninput = computeTemperature;
+      destTemp.oninput = computeTemperature;
+      sourceTempUnit.addEventListener("change", computeTemperature);
+      destTempUnit.addEventListener("change", computeTemperature);
+
+      break;
+    default:
+      break;
+  }
+
+  errorContainer = document.querySelector(".error");
+  errorMessage = document.querySelector("#error-message");
+  outputContainer = document.querySelector(".output");
+  // console.log(`Listeners added...`);
+}
+
+// ***************************
+//        AGE
+// ***************************
+function convertAge(age) {
+  let convertedAge;
+  switch (ageOptions.value) {
+    case "years":
+      convertedAge = age;
+      break;
+    case "months":
+      convertedAge = age * 12;
+      break;
+    case "weeks":
+      convertedAge = Math.round(age * 52.143);
+      break;
+    case "days":
+      convertedAge = age * 365;
+      break;
+    default:
+      convertedAge = age;
+      break;
+  }
+  return convertedAge;
+}
+
+function computeAge() {
+  const parts = ageInput.value.split("-");
+  const dateNow = new Date();
+
+  if (
+    parseInt(parts[0]) >= 1500 &&
+    parseInt(parts[0]) <= parseInt(dateNow.getFullYear()) &&
+    parts[0].length == 4
+  ) {
+    removeError();
+    const birthDate = new Date(parts[0], parts[1] - 1, parts[2]);
+
+    // compute age in years
+    let ageNow = dateNow.getFullYear() - birthDate.getFullYear();
+    const monthChecker = dateNow.getMonth() - birthDate.getMonth();
+
+    // if today's current month is less than birth date month, subtract 1 since technically did not have birthday yet
+    // if it's the same month, we would check if the date is the less since getDate would return time in ms
+    if (
+      monthChecker < 0 ||
+      (monthChecker === 0 && dateNow.getDate() < birthDate.getDate())
+    ) {
+      ageNow--;
+    }
+
+    ageOutput.textContent = "The age is " + convertAge(ageNow) + " ";
+  } else {
+    // error message
+    createError();
+  }
+}
+
+// ***************************
+//        BMI
+// ***************************
+function computeBMI() {
+  let bmi;
+  let bmiClassification;
+  let weight;
+  let height;
+
+  // input checking
+  if (
+    sourceHeight.value != null &&
+    sourceWeight.value != null &&
+    sourceHeight.value != "" &&
+    sourceWeight.value != "" &&
+    sourceHeight.value >= 1 &&
+    sourceWeight.value >= 1
+  ) {
+    removeError();
+    // convert weight to kg
+    if (weightUnit.value == "lb") {
+      weight = sourceWeight.value / 2.20462262185;
+    } else {
+      weight = sourceWeight.value;
+    }
+
+    // convert height to m
+    switch (heightUnit.value) {
+      case "cm":
+        height = sourceHeight.value / 100;
+        break;
+      case "ft":
+        height = sourceHeight.value / 3.28084;
+        break;
+      case "in":
+        height = sourceHeight.value / 39.3701;
+        break;
+      default:
+        height = sourceHeight.value;
+        break;
+    }
+
+    bmi = weight / (height * height);
+
+    if (bmi < 18.5) {
+      bmiClassification = "Underweight";
+    } else if (bmi >= 18.5 && bmi < 24.9) {
+      bmiClassification = "Normal";
+    } else if (bmi >= 24.9 && bmi < 30) {
+      bmiClassification = "Overweight";
+    } else if (bmi >= 30.0) {
+      bmiClassification = "Obese";
+    }
+
+    const bmiCharCount = bmi.toString().length;
+    let bmiAppend;
+
+    if (bmiCharCount >= 5) {
+      bmiAppend = bmi.toString().substr(0, 5);
+    } else {
+      bmiAppend = bmi.toString();
+    }
+
+    // create span element
+    const bmiSpan = document.createElement("span");
+    bmiSpan.textContent = bmiAppend;
+    bmiSpan.classList.add("result-highlight");
+    bmiResult.textContent = "Your BMI is ";
+    bmiResult.appendChild(bmiSpan);
+
+    const bmiHighlight = document.createElement("span");
+    bmiHighlight.textContent = bmiClassification;
+    bmiHighlight.classList.add("result-highlight");
+    const resultStatus = ". You are " + bmiHighlight.outerHTML + ".";
+
+    bmiResult.innerHTML += resultStatus;
+
+    bmiResult.style.display = "block";
+  } else {
+    // add error here
+    createError();
+  }
+}
+
+// ***************************
+//        DATA
+// ***************************
+function computeData() {
+  let multiplier = 0;
+  let result = 0;
+  //   check if source input is empty
+
+  if (
+    sourceInp.value != null &&
+    sourceInp.value != "" &&
+    sourceInp.value >= 0
+  ) {
+    removeError();
+    multiplier = dataTable[outData.value] - dataTable[sourceData.value];
+
+    // for bits
+    if (multiplier >= 10) {
+      result = sourceInp.value / (8 * Math.pow(1024, dataTable[outData.value]));
+    } else if (multiplier <= -5) {
+      result =
+        sourceInp.value * Math.pow(1024, dataTable[sourceData.value]) * 8;
+    }
+
+    // for bytes
+    if (multiplier > 0 && multiplier < 10) {
+      result = sourceInp.value / Math.pow(1024, multiplier);
+    } else if (multiplier < 0 && multiplier > -5) {
+      result = sourceInp.value * Math.pow(1024, multiplier * -1);
+    } else if (multiplier === 0) {
+      result = sourceInp.value;
+    }
+
+    outInt.value = result;
+  } else {
+    //   show error or do nothing
+    createError();
+    // sourceInp.value = "";
+    // outInt.value = "";
+  }
+}
+
+function computeDataReverse() {
+  let multiplier = 0;
+  let result = 0;
+
+  if (outInt.value != null && outInt.value != "" && outInt.value >= 0) {
+    multiplier = dataTable[sourceData.value] - dataTable[outData.value];
+    removeError();
+    // for bits
+    if (multiplier >= 10) {
+      result = outInt.value / (8 * Math.pow(1024, dataTable[sourceData.value]));
+    } else if (multiplier <= -5) {
+      result = outInt.value * Math.pow(1024, dataTable[outData.value]) * 8;
+    }
+
+    // for bytes
+    if (multiplier > 0 && multiplier < 10) {
+      result = outInt.value / Math.pow(1024, multiplier);
+    } else if (multiplier < 0 && multiplier > -5) {
+      result = outInt.value * Math.pow(1024, multiplier * -1);
+    } else if (multiplier === 0) {
+      result = outInt.value;
+    }
+
+    sourceInp.value = result;
+  } else {
+    createError();
+    // sourceInp.value = "";
+    // outInt.value = "";
+  }
+}
+
+// ***************************
+//        DATE
+// ***************************
+// TODO: check if first date is greater than second date
+function computeDate() {
+  if (isValidDate(dateFrom.value) && isValidDate(dateTo.value)) {
+    removeError();
+    const date1 = convertStringToDate(dateFrom.value);
+    const date2 = convertStringToDate(dateTo.value);
+    console.log(`Date1 ${date1} and date2 ${date2}`);
+
+    const sourceDate = luxon.DateTime.fromJSDate(date1);
+    const destDate = luxon.DateTime.fromJSDate(date2);
+
+    const diff = destDate
+      .diff(sourceDate, ["years", "months", "days"])
+      .toObject();
+
+    dateYear.textContent = diff["years"] + " years";
+    dateMonths.textContent = diff["months"] + " months";
+    dateDays.textContent = diff["days"] + " days";
+  } else {
+    createError();
+  }
+}
+
+function convertStringToDate(dateString) {
+  const dateParts = dateString.split("-");
+  console.log(
+    `0 is ${dateParts[0]} 1 is ${dateParts[1] - 1}, 2 is ${dateParts[2]}`
+  );
+  return new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
+}
+
+// ***************************
+//        DISCOUNT
+// ***************************
+function computeDiscount() {
+  if (
+    isNotEmptyAndValid(discOrigPrice.value, 0) &&
+    isNotEmptyAndValid(discDiscRate.value, 0, 100)
+  ) {
+    removeError();
+    const originalPrice = parseFloat(discOrigPrice.value);
+    let finalPrice;
+    let discountPrice;
+    const discountRate = parseFloat(discDiscRate.value) / 100;
+    discountPrice = originalPrice * (parseFloat(discDiscRate.value) / 100);
+    finalPrice = originalPrice - discountPrice;
+
+    discFinalPrice.innerHTML = finalPrice;
+  } else {
+    createError();
+    // discFinalPrice.innerHTML = "";
+  }
+}
+
+// ***************************
+//        LENGTH
+// ***************************
 function convertFromCM(value, toUnit) {
   const inputValue = parseFloat(value);
   let convertedValue;
-  console.log(`Value from CM is ${value}`);
   switch (toUnit) {
     case "m":
       convertedValue = inputValue / 100;
@@ -229,7 +641,6 @@ function convertToCM(value, fromUnit) {
       break;
   }
 
-  console.log(`Value in cm is ${convertedValue}`);
   return convertedValue;
 }
 
@@ -239,6 +650,7 @@ function computeLength() {
   const outUnit = lengthOutputOption.value;
 
   if (isNotEmptyAndValid(inLength, 0)) {
+    removeError();
     if (inUnit != outUnit) {
       let temp = convertToCM(inLength, inUnit);
       let output = convertFromCM(temp, outUnit);
@@ -248,463 +660,190 @@ function computeLength() {
       lengthOutput.value = inLength;
     }
   } else {
-    console.log(`Length: Input is not valid!`);
+    createError();
   }
 }
 
-function computeDiscount() {
-  console.log(
-    `price is ${isNotEmptyAndValid(
-      discOrigPrice.value,
-      0
-    )} and discount is ${isNotEmptyAndValid(discDiscRate.value, 0, 100)}`
-  );
-  if (
-    isNotEmptyAndValid(discOrigPrice.value, 0) &&
-    isNotEmptyAndValid(discDiscRate.value, 0, 100)
-  ) {
-    // compute discount
-    const originalPrice = parseFloat(discOrigPrice.value);
-    let finalPrice;
-    let discountPrice;
-    const discountRate = parseFloat(discDiscRate.value) / 100;
-    discountPrice = originalPrice * (parseFloat(discDiscRate.value) / 100);
-    finalPrice = originalPrice - discountPrice;
-
-    console.log(
-      `Original Price is: ${originalPrice}. Discount Rate is ${
-        discountRate * 100
-      }%. Discount Price is ${discountPrice}. Final Price is ${finalPrice}`
-    );
-
-    discFinalPrice.innerHTML = finalPrice;
-  } else {
-    discFinalPrice.innerHTML = "";
-  }
-}
-
+// ***************************
+//        TEMPERATURE
+// ***************************
 function computeTemperature() {
   if (sourceTemp.value != null && sourceTemp.value != "") {
+    removeError();
     const from = sourceTemp.value;
     const fromUnit = sourceTempUnit.value;
     const toUnit = destTempUnit.value;
 
-    destTemp.value = convertTemp(
-      sourceTemp.value,
-      sourceTempUnit.value,
-      destTempUnit.value
-    );
-  } else {
-    console.log(`No valid input!`);
-  }
-}
+    if (fromUnit == toUnit) {
+      destTemp.value = sourceTemp.value;
+    } else {
+      let temperature = parseFloat(from);
 
-function convertTemp(from, fromUnit, toUnit) {
-  let temperature = from;
+      // convert whatever unit to celcius
+      switch (fromUnit) {
+        case "farenheit":
+          temperature = (temperature - 32) / (9 / 5);
+          break;
+        case "kelvin":
+          temperature = temperature - 273.15;
+          break;
+        case "rankine":
+          temperature = (temperature - 32 - 459.67) / (9 / 5);
+          break;
+        case "reaumur":
+          temperature = temperature * 1.25;
+          break;
+        default:
+          break;
+      }
 
-  if (fromUnit == toUnit) {
-    temperature = from;
-  } else {
-    switch (fromUnit) {
-      case "celcius":
-        temperature = convertFromCelcius(from, toUnit);
-        break;
-      case "farenheit":
-        temperature = convertFromFarenheit(from, toUnit);
-        break;
-      case "kelvin":
-        temperature = convertFromKelvin(from, toUnit);
-        break;
-      case "rankine":
-        temperature = convertFromRankine(from, toUnit);
-        break;
-      case "reaumur":
-        temperature = convertFromReaumur(from, toUnit);
-        break;
-      default:
-        temperature = 0;
-        break;
+      // convert celcius to destination unit
+      switch (toUnit) {
+        case "farenheit":
+          temperature = temperature * (9 / 5) + 32;
+          break;
+        case "kelvin":
+          temperature = temperature + 273.15;
+          break;
+        case "rankine":
+          temperature = temperature * (9 / 5) + 491.67;
+          break;
+        case "reaumur":
+          temperature = temperature * (4 / 5);
+          break;
+        default:
+          break;
+      }
+
+      destTemp.value = temperature;
     }
+  } else {
+    createError();
   }
-
-  return temperature;
 }
 
-function convertFromCelcius(from, toUnit) {
-  let temperature = parseFloat(from);
-
-  console.log(`Converting from ${from}...With type ${typeof from}`);
-
-  switch (toUnit) {
-    case "farenheit":
-      temperature = temperature * (9 / 5) + 32;
-      break;
-    case "kelvin":
-      temperature = temperature + 273.15;
-      break;
-    case "rankine":
-      temperature = temperature * (9 / 5) + 491.67;
-      break;
-    case "reaumur":
-      temperature = temperature * (4 / 5);
-      break;
-    default:
-      temperature = 0;
-      break;
-  }
-
-  return temperature;
-}
-
-function convertFromFarenheit(from, toUnit) {
-  let temperature = parseFloat(from);
-
-  switch (toUnit) {
-    case "celcius":
-      temperature = (temperature - 32) / (9 / 5);
-      break;
-    case "kelvin":
-      temperature = (temperature + 459.67) / (9 / 5);
-      break;
-    case "rankine":
-      temperature = temperature + 459.67;
-      break;
-    case "reaumur":
-      temperature = (temperature - 32) / (9 / 4);
-      break;
-    default:
-      temperature = 0;
-      break;
-  }
-
-  return temperature;
-}
-
-function convertFromKelvin(from, toUnit) {
-  let temperature = parseFloat(from);
-
-  switch (toUnit) {
-    case "celcius":
-      temperature = temperature - 273.15;
-      break;
-    case "farenheit":
-      temperature = temperature * (9 / 5) - 459.67;
-      break;
-    case "rankine":
-      temperature = temperature * (9 / 5);
-      break;
-    case "reaumur":
-      temperature = (temperature - 273.15) * 0.8;
-      break;
-    default:
-      temperature = 0;
-      break;
-  }
-
-  return temperature;
-}
-
-function convertFromRankine(from, toUnit) {
-  let temperature = parseFloat(from);
-
-  switch (toUnit) {
-    case "celcius":
-      temperature = (temperature - 32 - 459.67) / (9 / 5);
-      break;
-    case "kelvin":
-      temperature = temperature / (9 / 5);
-      break;
-    case "farenheit":
-      temperature = temperature - 459.67;
-      break;
-    case "reaumur":
-      temperature = (temperature - 32 - 459.67) / (9 / 5);
-      break;
-    default:
-      temperature = 0;
-      break;
-  }
-
-  return temperature;
-}
-
-function convertFromReaumur(from, toUnit) {
-  let temperature = parseFloat(from);
-
-  switch (toUnit) {
-    case "celcius":
-      temperature = temperature * 1.25;
-      break;
-    case "kelvin":
-      temperature = temperature * 1.25 + 273.15;
-      break;
-    case "farenheit":
-      temperature = temperature * 2.25 + 32;
-      break;
-    case "rankine":
-      temperature = temperature * 2.25 + 32 + 459.67;
-      break;
-    default:
-      temperature = 0;
-      break;
-  }
-
-  return temperature;
-}
-
-function computeDate() {
-  const date1 = convertStringToDate(dateFrom.value);
-  const date2 = convertStringToDate(dateTo.value);
-
-  const sourceDate = luxon.DateTime.fromJSDate(date1);
-  const destDate = luxon.DateTime.fromJSDate(date2);
-
-  const diff = destDate
-    .diff(sourceDate, ["years", "months", "days"])
-    .toObject();
-
-  dateYear.textContent = diff["years"] + " years";
-  dateMonths.textContent = diff["months"] + " months";
-  dateDays.textContent = diff["days"] + " days";
-}
-
-function convertStringToDate(dateString) {
-  const dateParts = dateString.split("-");
-  return new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
-}
-
+// ***************************
+//        FUNCTIONALITIES
+// ***************************
 function getDateToday() {
   const today = new Date();
-  return today.getFullYear() + "-" + today.getMonth() + "-" + today.getDate();
-}
+  let month = String(today.getMonth() + 1);
 
-function convertAge(age) {
-  let convertedAge;
-  switch (ageOptions.value) {
-    case "years":
-      convertedAge = age;
-      break;
-    case "months":
-      convertedAge = age * 12;
-      break;
-    case "weeks":
-      convertedAge = Math.round(age * 52.143);
-      break;
-    case "days":
-      convertedAge = age * 365;
-      break;
-    default:
-      convertedAge = age;
-      break;
+  if (month.length == 1) {
+    month = "0" + month;
   }
-  return convertedAge;
+
+  return today.getFullYear() + "-" + month + "-" + today.getDate();
 }
 
-function computeAge() {
-  const parts = ageInput.value.split("-");
-  const dateNow = new Date();
-
-  if (
-    parseInt(parts[0]) >= 1500 &&
-    parseInt(parts[0]) <= parseInt(dateNow.getFullYear()) &&
-    parts[0].length == 4
-  ) {
-    toggleAgeError(1);
-    const birthDate = new Date(parts[0], parts[1] - 1, parts[2]);
-
-    // compute age in years
-    let ageNow = dateNow.getFullYear() - birthDate.getFullYear();
-    const monthChecker = dateNow.getMonth() - birthDate.getMonth();
-
-    // if today's current month is less than birth date month, subtract 1 since technically did not have birthday yet
-    // if it's the same month, we would check if the date is the less since getDate would return time in ms
+function isNotEmptyAndValid(value, lowerLimit, upperLimit) {
+  const temp = parseInt(value);
+  if (upperLimit != null) {
     if (
-      monthChecker < 0 ||
-      (monthChecker === 0 && dateNow.getDate() < birthDate.getDate())
+      value != null &&
+      value != "" &&
+      value >= lowerLimit &&
+      value <= upperLimit
     ) {
-      ageNow--;
-    }
-
-    ageOutput.textContent = convertAge(ageNow);
-  } else {
-    // error message
-    toggleAgeError(0);
-  }
-}
-
-function toggleAgeError(errCode) {
-  if (errCode === 0 && ageErrorContainer.style.display != "inline-block") {
-    ageErrorContainer.style.display = "inline-block";
-    // ageOutputContainer.style.display = "none";
-  } else {
-    // ageOutputContainer.style.display = "flex";
-    ageErrorContainer.style.display = "none";
-  }
-}
-
-function computeBMI() {
-  let bmi;
-  let bmiClassification;
-  let weight;
-  let height;
-
-  // input checking
-  if (
-    sourceHeight.value != null &&
-    sourceWeight.value != null &&
-    sourceHeight.value != "" &&
-    sourceWeight.value != "" &&
-    sourceHeight.value >= 1 &&
-    sourceWeight.value >= 1
-  ) {
-    // convert weight to kg
-    if (weightUnit.value == "lb") {
-      weight = sourceWeight.value / 2.20462262185;
+      return true;
     } else {
-      weight = sourceWeight.value;
+      return false;
     }
-
-    // convert height to m
-    switch (heightUnit.value) {
-      case "cm":
-        height = sourceHeight.value / 100;
-        break;
-      case "ft":
-        height = sourceHeight.value / 3.28084;
-        break;
-      case "in":
-        height = sourceHeight.value / 39.3701;
-        break;
-      default:
-        height = sourceHeight.value;
-        break;
-    }
-
-    bmi = weight / (height * height);
-
-    if (bmi < 18.5) {
-      bmiClassification = "Underweight";
-    } else if (bmi >= 18.5 && bmi < 24.9) {
-      bmiClassification = "Normal";
-    } else if (bmi >= 24.9 && bmi < 30) {
-      bmiClassification = "Overweight";
-    } else if (bmi >= 30.0) {
-      bmiClassification = "Obese";
-    }
-
-    const bmiCharCount = bmi.toString().length;
-    let bmiAppend;
-
-    if (bmiCharCount >= 5) {
-      bmiAppend = bmi.toString().substr(0, 5);
+  } else {
+    if (value != null && value != "" && value >= lowerLimit) {
+      return true;
     } else {
-      bmiAppend = bmi.toString();
+      return false;
     }
-
-    // create span element
-    const bmiSpan = document.createElement("span");
-    bmiSpan.textContent = bmiAppend;
-    bmiSpan.classList.add("bmi-class");
-    bmiResult.textContent = "Your BMI is ";
-    bmiResult.appendChild(bmiSpan);
-
-    const bmiHighlight = document.createElement("span");
-    bmiHighlight.textContent = bmiClassification;
-    bmiHighlight.classList.add("bmi-class");
-    bmiResultStatus.textContent = "You are ";
-    bmiResultStatus.appendChild(bmiHighlight);
-
-    bmiResult.style.display = "block";
-    bmiResultStatus.style.display = "block";
-  } else {
-    console.log(`Wrong input!`);
   }
 }
 
-// scenarios
-// [x] from lower to larger excluding bits
-// [x] from larger to lower excluding bits
-// [x] same unit excluding bits
-// [x] bits
-// [x] onchange on output should be a diff function to change inpvalue
-function computeData() {
-  let multiplier = 0;
-  let result = 0;
-  //   check if source input is empty
+function isValidDate(date) {
+  // will check if string is on the pattern yyyy-mm-dd
+  // yyyy must be greater than 1000 but less than or equal to 9999
+  return /^[1-9]{1}[0-9]{3}\-(0[0-9]|1[0-2])\-([0-2][0-9]|[3][0-1])/.test(date);
+}
 
-  console.log(this);
+// TODO:
+// https://stackoverflow.com/questions/24603919/html5-date-input-6-digit-year
+
+function truncateAge() {
+  console.log(`Listening inside truncate...`);
+  if (ageInput.value.length > 10) {
+    console.log(ageInput.value);
+    const first = ageInput.value.slice(0, 4);
+    const second = ageInput.value.slice(5, 11);
+    ageInput.value = first + second;
+    console.log(ageInput.value);
+  }
+}
+
+// TODO: programatically create error message since there are some fields that would require a different message and a different location
+// some containers also have multiple inputs so we need to determine where to put the error message
+function addErrorMessage(message) {
+  errorMessage.textContent = "";
+  const textContent = document.createTextNode(message);
+  errorMessage.appendChild(textContent);
+}
+
+function createError() {
+  const hasRowError = displaySection.lastElementChild.classList.contains(
+    "error"
+  );
+
+  const hasOutput = displaySection.lastElementChild.classList.contains(
+    "output"
+  );
+
+  if (!hasRowError) {
+    const row = document.createElement("div");
+    row.classList.add("row", "error");
+
+    const col = document.createElement("div");
+    col.classList.add("col", "col-12", "error-col");
+
+    const img = document.createElement("img");
+    const imgSrc = "../img/warning.png";
+    img.src = imgSrc;
+    img.classList.add("error-img");
+
+    const errMessage = document.createElement("div");
+    errMessage.innerHTML = "Please check your input.";
+    errMessage.classList.add("error-message");
+
+    col.append(img);
+    col.append(errMessage);
+
+    row.append(col);
+
+    if (
+      hasOutput &&
+      !displaySection.lastElementChild.classList.contains("hidden")
+    ) {
+      displaySection.lastElementChild.classList.toggle("hidden");
+    }
+
+    displaySection.append(row);
+  }
+}
+
+function removeError() {
+  const hasRowError = displaySection.lastElementChild.classList.contains(
+    "error"
+  );
+
+  if (hasRowError) {
+    displaySection.lastChild.remove();
+  }
+
+  const hasOutput = displaySection.lastElementChild.classList.contains(
+    "output"
+  );
+
   if (
-    sourceInp.value != null &&
-    sourceInp.value != "" &&
-    sourceInp.value >= 0
+    hasOutput &&
+    displaySection.lastElementChild.classList.contains("hidden")
   ) {
-    multiplier = dataTable[outData.value] - dataTable[sourceData.value];
-
-    // for bits
-    if (multiplier >= 10) {
-      console.log("Running...");
-      result = sourceInp.value / (8 * Math.pow(1024, dataTable[outData.value]));
-    } else if (multiplier <= -5) {
-      result =
-        sourceInp.value * Math.pow(1024, dataTable[sourceData.value]) * 8;
-    }
-
-    // for bytes
-    if (multiplier > 0 && multiplier < 10) {
-      console.log("converting up");
-      result = sourceInp.value / Math.pow(1024, multiplier);
-    } else if (multiplier < 0 && multiplier > -5) {
-      console.log("converting down");
-      result = sourceInp.value * Math.pow(1024, multiplier * -1);
-    } else if (multiplier === 0) {
-      result = sourceInp.value;
-    }
-
-    outInt.value = result;
-  } else {
-    //   show error or do nothing
-    sourceInp.value = "";
-    outInt.value = "";
+    displaySection.lastElementChild.classList.toggle("hidden");
   }
-}
-
-function computeDataReverse() {
-  let multiplier = 0;
-  let result = 0;
-
-  if (outInt.value != null && outInt.value != "" && outInt.value >= 0) {
-    multiplier = dataTable[sourceData.value] - dataTable[outData.value];
-
-    // for bits
-    if (multiplier >= 10) {
-      result = outInt.value / (8 * Math.pow(1024, dataTable[sourceData.value]));
-    } else if (multiplier <= -5) {
-      result = outInt.value * Math.pow(1024, dataTable[outData.value]) * 8;
-    }
-
-    // for bytes
-    if (multiplier > 0 && multiplier < 10) {
-      console.log("converting up");
-      result = outInt.value / Math.pow(1024, multiplier);
-    } else if (multiplier < 0 && multiplier > -5) {
-      console.log("converting down");
-      result = outInt.value * Math.pow(1024, multiplier * -1);
-    } else if (multiplier === 0) {
-      result = outInt.value;
-    }
-
-    sourceInp.value = result;
-  } else {
-    sourceInp.value = "";
-    outInt.value = "";
-  }
-}
-
-// check if DOM Content has loaded
-// if document has finished loading the initial structure
-// to avoid null pointers if ever we are searching for a specific element and it hasn't loaded yet
-if (document.onreadystatechange == "loading") {
-  document.addEventListener("DOMContentLoaded", addListeners);
-} else {
-  addListeners();
 }

@@ -1,95 +1,278 @@
 * {
   margin: 0;
-  border: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700&display=swap");
+
+:root {
+  --circle-background: #d2edf9;
+  --circle-hover: #5ab9ea;
+  --display-background-color: #e6e6fa;
+  /* hsla(199, 87%, 57%, 0.425); */
+  --body-background-color: #d3eef8;
+  --error-background-color: #ffcccc;
+  --error-text-color: #ff0033;
+  --error-font-weight: lighter;
+}
+
 body {
-  background-color: #ccc;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 16px;
+  min-height: 100vh;
+  font-family: "Roboto", sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #8860d0;
+  background: linear-gradient(
+    145deg,
+    rgba(136, 96, 208, 1) 0%,
+    rgba(193, 200, 228, 1) 64%,
+    rgba(86, 128, 233, 1) 100%
+  );
 }
 
-h1 {
-  margin-top: 20px;
-  text-align: center;
-}
-
-.container,
-.dc-container,
-.bmi-container,
-.age-container {
-  border: 3px solid black;
-  width: 400px;
-  margin: 50px auto;
+.display-container {
+  width: 100%;
   height: auto;
-  padding: 10px;
-  background-color: rgb(226, 186, 226);
+  /* border: 3px solid red; */
+  /* flex: 1 0 200px; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.dc-input,
-.dc-output,
-.bmi-input,
-.bmi-output,
-.bmi-weight-container,
-.bmi-height-container,
-.age-input,
-.age-output,
-.age-error-container,
-.input-container,
-.output-container {
-  margin: 10px 10px 0px 0px;
+.data-container {
+  width: 0px;
+  height: 0px;
+  background-color: var(--display-background-color);
+  border: 2px solid black;
+  padding: 25px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  visibility: hidden;
+  -webkit-transition: all ease-in-out 0.5s;
+  -moz-transition: all ease-in-out 0.5s;
+  -o-transition: all ease-in-out 0.5ss;
+  transition: all ease-in-out 0.5s;
 }
 
-.bmi-btn-container {
-  margin-top: 10px;
+.buttons-container {
+  width: 100%;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: center;
 }
 
-.bmi-output {
-  text-align: center;
-}
-
-#bmi-result,
-#bmi-result-status {
-  display: none;
-  margin: 10px auto;
-}
-
-.bmi-class {
-  font-weight: bold;
-}
-
-label {
-  font-weight: bold;
-}
-
-.input-label {
-  display: inline-block;
-  width: 120px;
-}
-
-input {
-  width: 100px;
-  border: 1px solid black;
-}
-
-.input-date {
+.circle-container {
   width: 150px;
-  text-align: center;
-}
-
-select {
-  border: 1px solid black;
-  width: 100px;
-}
-
-.bmi-table-container {
+  height: 150px;
   display: flex;
   flex-direction: row;
   justify-content: center;
+  align-items: center;
+}
+
+.circle {
+  width: 100px;
+  height: 100px;
+  border: 1.5px solid black;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: all 0.3s;
+  background-color: var(--circle-background);
+  opacity: 1;
+  outline: 1px solid transparent;
+}
+
+h3 {
+  color: black;
+  text-align: center;
+  /* font-family: Arial, Helvetica, sans-serif; */
+  font-size: 1.1em;
+}
+
+/* input section */
+.row {
+  width: 100%;
+  margin: 2.5px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  animation-name: fadeIn;
+  animation-duration: 0.5s;
+  flex-wrap: wrap;
+}
+
+.error {
+  margin-top: 10px;
+  background-color: var(--error-background-color);
+  border-color: #ccc;
+  position: relative;
+  transform-style: preserve-3d;
+  animation: fadeIn 0.3s ease-in-out;
+  height: 25px;
+}
+
+.error:hover {
+  cursor: pointer;
+  background-color: var(--error-background-color);
+}
+
+.error-col {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center !important;
+  align-items: center;
+}
+
+/* .error:before {
+  content: "";
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-bottom: 20px solid var(--error-background-color);
+  transform: translateZ(-1px);
+  position: absolute;
+  top: -10px;
+  left: 100px;
+} */
+
+.error-img {
+  max-height: 100%;
+}
+
+.error-message {
+  font-size: small;
+  font-weight: var(--error-font-weight);
+  color: var(--error-text-color);
+  margin-left: 5px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.row-input-label {
+  flex: 0 1 120px;
+  font-weight: bold;
+  font-size: 1.05em;
+}
+
+.row-input {
+  flex-grow: 1;
+  flex-basis: 0;
+  text-align: right;
+}
+
+/* output */
+.output {
+  justify-content: center;
+  align-items: center;
+  margin-top: 2.5px;
+}
+
+.col > p {
+  width: 100%;
+  font-weight: bold;
+}
+
+.text-result {
+  margin-top: 10px;
+  font-size: 1.4em;
+}
+
+.result-highlight {
+  color: blue;
+  text-transform: uppercase;
+}
+
+/* .display-output {
+  margin-left: 115px;
+  text-align: left;
+} */
+
+.row-select {
+  width: 100%;
+  border: 1px solid black;
+}
+
+.age-options {
+  width: auto;
+  margin-left: 10px;
+}
+
+.col {
+  display: flex;
+  padding-left: 2.5px;
+  padding-right: 2.5px;
+  justify-content: left;
+  width: 100%;
+}
+
+.flex-center {
+  justify-content: center;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.col.center {
+  justify-content: center;
+}
+
+.col-2 {
+  width: 16.66%;
+}
+
+.col-3 {
+  width: 25%;
+}
+
+.col-4 {
+  width: 33.33%;
+}
+
+.col-5 {
+  width: 41.66%;
+}
+
+.col-6 {
+  width: 50%;
+}
+
+.col-8 {
+  width: 66.66%;
+}
+
+.col-9 {
+  width: 75%;
+}
+
+.col-10 {
+  width: 83.33%;
+}
+
+.col-12 {
+  width: 99%;
+}
+
+/* general html elements */
+input {
+  border: 1px solid black;
+}
+
+button {
+  margin: 0 auto;
 }
 
 .bmi-table,
@@ -101,21 +284,36 @@ td {
   text-align: center;
 }
 
-.age-output {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+/* animation */
+.circle:hover {
+  background-color: var(--circle-hover);
+  transform: scale(1.3);
+  cursor: pointer;
 }
 
-#dob-output {
-  margin-right: 10px;
+.hovered {
+  background-color: var(--circle-hover);
+  transform: scale(1.3);
 }
 
-.error {
-  color: red;
-  font-weight: bold;
+@keyframes zipIn {
+  0% {
+    width: 0px;
+    height: 0px;
+  }
+
+  100% {
+    width: 400px;
+    height: 300px;
+  }
 }
 
-.age-error-container {
-  display: none;
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }

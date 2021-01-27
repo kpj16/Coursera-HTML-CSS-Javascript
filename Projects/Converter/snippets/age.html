@@ -1,0 +1,40 @@
+<!-- AGE -->
+<div class="row">
+  <div class="col col-8">
+    <label for="dob-input" class="row-input-label">Date of Birth:</label>
+    <input type="date" class="row-input" name="dob-input" id="dob-input" />
+  </div>
+  <div class="col center col-4">
+    <button id="btn-age-compute">Compute</button>
+  </div>
+  <div class="col col-12 error hidden">
+    <strong id="error-message" class="error-message"></strong>
+  </div>
+</div>
+
+<!-- <div class="row error">
+  <div class="col col-12">
+    <p>Please enter a valid birthdate!</p>
+  </div>
+</div> -->
+
+<div class="row output hidden">
+  <div class="col col-12 flex-center">
+    <h3 id="dob-output" class="text-result"></h3>
+    <select name="age-options" class="row-select age-options" id="age-options">
+      <option value="years">Years</option>
+      <option value="months">Months</option>
+      <option value="weeks">Weeks</option>
+      <option value="days">Days</option>
+    </select>
+  </div>
+</div>
+
+<!-- <div class="row error">
+  <div class="col col-12 error-col">
+    <img src="../img/warning.png" class="error-img" alt="" />
+    <div class="error-message">
+      Please check your input. Click to learn more.
+    </div>
+  </div>
+</div> -->

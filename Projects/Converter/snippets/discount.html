@@ -1,0 +1,42 @@
+<!-- DISCOUNT -->
+<div class="row">
+  <div class="col col-12">
+    <label for="disc-original-price" class="row-input-label">
+      Original Price:
+    </label>
+    <input
+      type="number"
+      class="row-input"
+      name="disc-original-price"
+      id="disc-original-price"
+      min="0"
+      required
+    />
+  </div>
+</div>
+
+<div class="row">
+  <div class="col col-12">
+    <label for="disc-discount-rate" class="row-input-label">
+      Discount(%):
+    </label>
+    <input
+      type="number"
+      class="row-input"
+      name="disc-discount-rate"
+      id="disc-discount-rate"
+      min="0"
+      max="100"
+      required
+    />
+  </div>
+</div>
+
+<div class="row output">
+  <div class="col">
+    <p>
+      Final Price:
+      <span id="disc-final-price"></span>
+    </p>
+  </div>
+</div>
