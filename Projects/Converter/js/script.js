@@ -801,7 +801,7 @@ function createError() {
     col.classList.add("col", "col-12", "error-col");
 
     const img = document.createElement("img");
-    const imgSrc = "../img/warning.png";
+    const imgSrc = "/img/warning.png";
     img.src = imgSrc;
     img.classList.add("error-img");
 
