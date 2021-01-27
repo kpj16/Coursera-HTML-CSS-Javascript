@@ -66,8 +66,6 @@ let destTempUnit;
 // hard coding transition
 let transitionCount = 0;
 
-document.addEventListener("DOMContentLoaded", addListeners);
-
 function addListeners() {
   displaySection.addEventListener("transitionend", (event) => {
     transitionCount += 1;
@@ -847,3 +845,5 @@ function removeError() {
     displaySection.lastElementChild.classList.toggle("hidden");
   }
 }
+
+document.addEventListener("DOMContentLoaded", addListeners);
